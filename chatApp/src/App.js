@@ -4,6 +4,7 @@ import HomePage from './Pages/HomePage';
 import {Routes ,Route } from 'react-router-dom'
 import ChatPage from './Pages/ChatPage'
 import AppState from './context/AppState';
+import Call from './Pages/Call1';
 function App() {
   return (
     
@@ -15,6 +16,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path = '/chats' element={<ChatPage/>}/>
+      </Routes>
+      <Routes>
+        <Route path = '/call' element={<Call/>}/>
       </Routes>
     </div>
     </AppState>

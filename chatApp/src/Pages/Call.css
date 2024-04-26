@@ -1,0 +1,28 @@
+.call-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.video-grid-item {
+    position: relative;
+    width: 50%;
+}
+
+/* .video-element {
+    width: 100%;
+    height: auto;
+    border: 4px solid #fff;
+} */
+
+.local-video {
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    border: 4px solid #fff;
+}
+
+.remote-video {
+    border-radius: 8px;
+}
