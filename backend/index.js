@@ -19,7 +19,7 @@ io.on("connection",(socket)=>{
     
     // set up (user open chat app )
     socket.on('setup',(userData)=>{
-        // console.log(userData);
+        console.log(userData, "setup");
         socket.join(userData._id);
         socket.emit("Connected");
     });

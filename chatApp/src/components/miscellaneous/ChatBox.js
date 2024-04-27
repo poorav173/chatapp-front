@@ -1,7 +1,10 @@
 import React, { useContext } from 'react'
 import AppContext from '../../context/AppContext'
-import { Box } from '@chakra-ui/react';
+// import { Box } from '@chakra-ui/react';
 import SingleChat from './SingleChat';
+import { Box, FormControl, IconButton, Input, Spinner, Text, useToast, ButtonGroup } from '@chakra-ui/react';
+import { ArrowBackIcon, PhoneIcon, PlusSquareIcon } from '@chakra-ui/icons';
+
 
 const ChatBox = () => {
   const {selectedChat} = useContext(AppContext);

@@ -1,8 +1,8 @@
-import { Box, FormControl, IconButton, Input, Spinner, Text, useToast } from '@chakra-ui/react';
+import { Box, FormControl, IconButton, Input, Spinner, Text, useToast, ButtonGroup } from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react'
 import AppContext from '../../context/AppContext';
 import { getProfile, getSender } from '../../config/ChatLogic';
-import { ArrowBackIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, PhoneIcon, PlusSquareIcon } from '@chakra-ui/icons';
 import ProfileModal from './ProfileModal';
 import UpdateGroupChatModal from './UpdateGroupChatModal';
 import axios from 'axios';
@@ -10,6 +10,8 @@ import ScrollableChat from './ScrollableChat';
 
 import io from "socket.io-client"
 import { encryptWithAES } from '../../config/Secure';
+import Call from '../../Pages/Call';
+import { useNavigate } from 'react-router-dom';
 const END_POINT = "http://localhost:4000";
 var socket,selectedChatCompare;
 const SingleChat = () => {
@@ -19,6 +21,7 @@ const SingleChat = () => {
   const [newMessage, setNewMessage] = useState();
   const [socketConnected, setSocketConnected] = useState(false);
   const toast = useToast();
+  const navigate = useNavigate();
   // for socket setup
   useEffect(() => {
     socket = io(END_POINT);
@@ -100,6 +103,13 @@ const SingleChat = () => {
       }
     })
   })
+  const handleVideoCall = ()=>{
+    navigate("/call");
+    console.log("Hello how are you ", selectedChat);
+  }
+  const handleAudioCall = ()=>{
+    console.log("I am clearly fine", selectedChat);
+  }
   return (
     <>
     {selectedChat?(
@@ -125,6 +135,12 @@ const SingleChat = () => {
             ):(
             <>
                 {getSender(user.user,selectedChat.users)}
+                <Box>
+              <ButtonGroup>
+                <IconButton icon={<PlusSquareIcon />} colorScheme="teal" mr={2} onClick={handleVideoCall}/>
+                <IconButton icon={<PhoneIcon />} colorScheme="teal" onClick={handleAudioCall}/>
+              </ButtonGroup>
+            </Box>
                 <ProfileModal user={getProfile(user.user,selectedChat.users)}/>
             </>
             )}

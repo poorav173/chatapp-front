@@ -1,16 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Button, Grid, GridItem, Input, Box, Flex } from '@chakra-ui/react';
 import { io } from 'socket.io-client';
+import { useNavigate } from 'react-router-dom';
+import AppContext from '../context/AppContext';
 
 const socket = io('http://localhost:4000'); // Replace with your server URL
 
 const Call = () => {
+  const {user, selectedChat, setselectedChat, fetchAgain,setfetchAgain} = useContext(AppContext);
     const [localStream, setLocalStream] = useState(null);
     const [remoteStream, setRemoteStream] = useState(null);
     const [remoteUserId, setRemoteUserId] = useState('');
     const localVideoRef = useRef(null);
     const remoteVideoRef = useRef(null);
-
+    const navigate = useNavigate();
+    console.log(user, selectedChat, setselectedChat, fetchAgain, setfetchAgain, "call message .......");
     useEffect(() => {
         // Get local audio and video stream
         navigator.mediaDevices.getUserMedia({ audio: true, video: true })
@@ -45,6 +49,9 @@ const Call = () => {
     const handleChange = (event) => {
         setRemoteUserId(event.target.value);
     };
+    const endCall = ()=>{
+        navigate("/chats");
+    }
 
     return (
         <Flex justify="center" align="center" w="100vw" h="100vh">
@@ -62,6 +69,7 @@ const Call = () => {
                 </GridItem>
                 <GridItem>
                     <Button onClick={startCall}>Start Call</Button>
+                    <Button onClick={endCall}>End Call</Button>
                 </GridItem>
             </Grid>
         </Flex>
